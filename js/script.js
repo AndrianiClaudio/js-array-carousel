@@ -20,6 +20,7 @@ const text = [
     'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
     'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
 ]
+let startIndex = 1;
 // FINE dati ricevuti
 const body = document.querySelector('body'); //seleziono body
 // creo div.container
@@ -33,17 +34,17 @@ mainImgContainer.classList.add('main-img-container','d-flex');
 // CONTAINER > MAIN-IMG-CONTAINER
 container.append(mainImgContainer);
 // MAIN-IMG-CONTAINER > IMG
-mainImgContainer.innerHTML = `<img src = ${items[1]} alt=''>`;
+mainImgContainer.innerHTML = `<img class='img--${startIndex}' src = ${items[startIndex]} alt=''>`;
 // creo div.text-div
 const textDiv = document.createElement('div');
 textDiv.classList.add('text-div','d-flex');
 // creo span.title
 const span = document.createElement('span');
 span.classList.add('title')
-span.innerHTML = title[1];
+span.innerHTML = title[startIndex];
 // creo paragrafo
 const p = document.createElement('p');
-p.innerHTML = text[1];
+p.innerHTML = text[startIndex];
 // MAIN-IMG-CONTAINER > TEXT-DIV
 mainImgContainer.append(textDiv);
 /*  TEXT-DIV > SPAN,
@@ -55,10 +56,17 @@ thumbnailsMenu.classList.add('thumbnails-menu','d-flex');
 // CONTAINER > THUMBANAILS-MENU
 container.append(thumbnailsMenu);
 //scorro la lista (items.lenght = qualsiasi lista assegnata.lenght ... necessita controllo in caso di usi futuri)
+//lunghezza in caso di aggiunta/rimozione img future
+let thItemLen = 100/items.length;
+// console.log(thItemLen);
 for(let i = 0; i<items.length;i++) {
     // Creo div.thumbnails-item
     const thumbnailsItem = document.createElement('img');
     thumbnailsItem.classList.add('thumbnails-item');
+    thumbnailsItem.style.height = `${thItemLen}%`;
+    if(i == startIndex) {
+        thumbnailsItem.classList.add('active');
+    }
     //associo src immagine a seconda dell'indice
     thumbnailsItem.src=items[i];
     thumbnailsMenu.innerHTML += thumbnailsItem.outerHTML;
