@@ -12,34 +12,43 @@ body {
     display: flex;
     align-items: center;
     height: 100vh;
-    min-height: 200px;
     width: 100%;
-    min-width: 700px;
+    min-width: 900px;
+    min-height: 350px;
+    max-height: 800px;
     padding: 20vh 10vw;
 }
 .main-img {
     width: 80%;
     height: 100%;
-    max-width: 550px;
+    max-width: 750px;
 }
 .main-img img {
     width: 100%;
     height: 100%;
 }
 .thumbnails-menu {
+    position: relative;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     width: 20%;
-    max-width: 175px;
+    max-width: 150px;
     height: 100%;
-    /* background-color: saddlebrown; */
+    max-width: 550px;
+}
+
+.thumbnails-menu .arrow-up,
+.thumbnails-menu .arrow-down {
+    position: absolute;
+}
+
+.thumbnails-menu .arrow-up {
+    top: 10; 
 }
 .thumbnails-item {
-    /* background-color: yellow; */
     height: calc(100% / 5);
     width: 100%;
-    /* border: 2px solid aquamarine; */
 }
 .thumbnails-item img {
     height: 100%;
