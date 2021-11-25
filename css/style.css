@@ -4,19 +4,19 @@
     padding: 0;
 }
 
-body {
+/* body {
     overflow-x: auto;
-}
+} */
 
 .container {
     display: flex;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     min-width: 900px;
     min-height: 350px;
     max-height: 800px;
-    padding: 20vh 10vw;
+    padding: 100px 10vw;
 }
 .main-img {
     display: flex;
@@ -46,6 +46,9 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    background-color: grey;
+    padding: 0.2rem;
+    border-radius: 50%;
 }
 
 .thumbnails-menu .arrow-up {
@@ -57,10 +60,5 @@ body {
 .thumbnails-item {
     background-color: yellow;
     height: calc(100% / 5);
-    width: 100%;
-    border: 2px solid aquamarine;
-}
-.thumbnails-item img {
-    height: 100%;
     width: 100%;
 }

@@ -45,10 +45,12 @@ body.prepend(container);
 container.append(mainImg,thumbnailsMenu);
 // Creazione e inserimento nel dom div.thumbnails-item
 for(let i = 0; i<items.length;i++) {
-    const thumbnailsItem = document.createElement('div');
+    // Creazione item Thumbnails
+    const thumbnailsItem = document.createElement('img');
     thumbnailsItem.classList.add('thumbnails-item');
-    // console.log(i,thumbnailsItem);
+    thumbnailsItem.src=items[i];
     thumbnailsMenu.innerHTML += thumbnailsItem.outerHTML;
+    // Creazione img Thumbnails
 }
 thumbnailsMenu.append(arrowUp,arrowDown);
 arrowUp.innerHTML = '<i class="fas fa-chevron-up"></i>';
