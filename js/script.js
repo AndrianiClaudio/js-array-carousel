@@ -27,22 +27,27 @@ const body = document.querySelector('body');
 // Creazione div.container
 const container = document.createElement('div');
 container.classList.add('container');
-// Creazione div.main-img
-const mainImg = document.createElement('div');
-mainImg.classList.add('main-img');
+// Creazione div.main-img-container
+const mainImgContainer = document.createElement('div');
+mainImgContainer.classList.add('main-img-container');
+mainImgContainer.style.backgroundImage = `url(${items[0]})`;
+// Creazione img.main-img
+// const mainImg = document.createElement('img');
+// mainImg.classList.add('main-img');
+// Creazione titolo
+const h1 = document.createElement('h1');
+h1.innerHTML = title[0];
+// Creazione text
+const p = document.createElement('p');
+p.innerHTML = text[0];
 // Creazione div.thumbmails-menu
 const thumbnailsMenu = document.createElement('div');
 thumbnailsMenu.classList.add('thumbnails-menu');
-// Creazione div.arrow-up
-const arrowUp = document.createElement('div');
-arrowUp.classList.add('arrow-up');
-// Creazione div.arrow-down
-const arrowDown = document.createElement('div');
-arrowDown.classList.add('arrow-down');
-
-//creo il mio DOM
+// inserimento nel DOM degli elementi creati
 body.prepend(container);
-container.append(mainImg,thumbnailsMenu);
+container.append(mainImgContainer,thumbnailsMenu);
+mainImgContainer.append(h1,p);
+// mainImgContainer.append(mainImg);
 // Creazione e inserimento nel dom div.thumbnails-item
 for(let i = 0; i<items.length;i++) {
     // Creazione item Thumbnails
@@ -52,7 +57,11 @@ for(let i = 0; i<items.length;i++) {
     thumbnailsMenu.innerHTML += thumbnailsItem.outerHTML;
     // Creazione img Thumbnails
 }
-thumbnailsMenu.append(arrowUp,arrowDown);
+// Creazione div.arrow-up/arrow-down
+const arrowUp = document.createElement('div');
+arrowUp.classList.add('arrow-up');
+const arrowDown = document.createElement('div');
+arrowDown.classList.add('arrow-down');
 arrowUp.innerHTML = '<i class="fas fa-chevron-up"></i>';
 arrowDown.innerHTML = '<i class="fas fa-chevron-down"></i>';
-// inserisco le immagini negli appositi contenitori
+thumbnailsMenu.append(arrowUp,arrowDown);
