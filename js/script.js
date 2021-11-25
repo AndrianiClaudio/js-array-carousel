@@ -50,4 +50,7 @@ for(let i = 0; i<items.length;i++) {
     // console.log(i,thumbnailsItem);
     thumbnailsMenu.innerHTML += thumbnailsItem.outerHTML;
 }
-// console.log(body, container, mainImg, thumbailsMenu, arrowUp, arrowDown);
+thumbnailsMenu.append(arrowUp,arrowDown);
+arrowUp.innerHTML = '<i class="fas fa-chevron-up"></i>';
+arrowDown.innerHTML = '<i class="fas fa-chevron-down"></i>';
+// inserisco le immagini negli appositi contenitori

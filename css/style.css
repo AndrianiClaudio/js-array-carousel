@@ -19,6 +19,7 @@ body {
     padding: 20vh 10vw;
 }
 .main-img {
+    display: flex;
     width: 80%;
     height: 100%;
     max-width: 750px;
@@ -43,10 +44,15 @@ body {
 .thumbnails-menu .arrow-up,
 .thumbnails-menu .arrow-down {
     position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .thumbnails-menu .arrow-up {
-    top: 10; 
+    top: 10px; 
+}
+.thumbnails-menu .arrow-down {
+    bottom: 10px; 
 }
 .thumbnails-item {
     background-color: yellow;
