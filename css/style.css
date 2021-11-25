@@ -64,19 +64,21 @@ span.title {
     /* background-color: yellow; */
     /* height: calc(100% / 5); */
     width: 100%;
-    filter:opacity(0.6);
+    filter:brightness(0.5);
 }
 .thumbnails-item.active {
-    filter:opacity(1);
-    border: 2px solid lightgrey;
+    filter:brightness(1);
+    border: 0.15rem solid lightgrey;
 }
 .thumbnails-menu .arrow-up,
 .thumbnails-menu .arrow-down {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    background-color: grey;
-    padding: 0.2rem 0.3rem;
+    font-size: 1rem;
+    color: grey;
+    background-color: lightgrey;
+    padding: 0rem 0.15rem;
     border-radius: 50%;
 }
 .thumbnails-menu .arrow-up {

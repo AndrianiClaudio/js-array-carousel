@@ -20,7 +20,7 @@ const text = [
     'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
     'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
 ]
-let startIndex = 1;
+let startIndex = 2;
 // FINE dati ricevuti
 const body = document.querySelector('body'); //seleziono body
 // creo div.container
@@ -62,7 +62,7 @@ let thItemLen = 100/items.length;
 for(let i = 0; i<items.length;i++) {
     // Creo div.thumbnails-item
     const thumbnailsItem = document.createElement('img');
-    thumbnailsItem.classList.add('thumbnails-item');
+    thumbnailsItem.classList.add('thumbnails-item',`img-thumb--${i}`);
     thumbnailsItem.style.height = `${thItemLen}%`;
     if(i == startIndex) {
         thumbnailsItem.classList.add('active');
@@ -83,3 +83,25 @@ arrowDown.innerHTML = '<i class="fas fa-chevron-down"></i>';
 THUMBNAILS > ARROW-DOWN
 */
 thumbnailsMenu.append(arrowUp,arrowDown);
+
+arrowUp.addEventListener('click',function() {
+    // console.log('click-up-ok');
+    const actualImage = document.querySelector('.main-img-container img');
+    //in caso ci fossero piu di 9 img ci sarebbe bisogno di altri controlli, per ora appare ok pre ricavare l'indice della foto attualmente visualizzata
+    actualImageIndex = actualImage.classList[0].slice(actualImage.classList[0].length - 1,actualImage.classList[0].length);
+    if(actualImageIndex > 0) {
+        console.log('Andremo sopra');
+    } else {
+        console.log('non puoi andare piu sopra');
+    }
+});
+arrowDown.addEventListener('click',function() {
+    const actualImage = document.querySelector('.main-img-container img');
+    //in caso ci fossero piu di 9 img ci sarebbe bisogno di altri controlli, per ora appare ok pre ricavare l'indice della foto attualmente visualizzata
+    actualImageIndex = actualImage.classList[0].slice(actualImage.classList[0].length - 1, actualImage.classList[0].length);
+    if (actualImageIndex == items.length-1) {
+        console.log('non puoi andare piu sotto');
+    } else {
+        console.log('Andremo sotto');
+    }
+});
