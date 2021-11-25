@@ -30,19 +30,24 @@ container.classList.add('container');
 // Creazione div.main-img
 const mainImg = document.createElement('div');
 mainImg.classList.add('main-img');
-// Creazione div.thumbails-menu
-const thumbailsMenu = document.createElement('div');
-thumbailsMenu.classList.add('thumbails-menu');
+// Creazione div.thumbmails-menu
+const thumbnailsMenu = document.createElement('div');
+thumbnailsMenu.classList.add('thumbnails-menu');
 // Creazione div.arrow-up
 const arrowUp = document.createElement('div');
 arrowUp.classList.add('arrow-up');
 // Creazione div.arrow-down
 const arrowDown = document.createElement('div');
 arrowDown.classList.add('arrow-down');
-// Creazione div.thumbnails-item
+
+//creo il mio DOM
+body.prepend(container);
+container.append(mainImg,thumbnailsMenu);
+// Creazione e inserimento nel dom div.thumbnails-item
 for(let i = 0; i<items.length;i++) {
     const thumbnailsItem = document.createElement('div');
     thumbnailsItem.classList.add('thumbnails-item');
-    console.log(i,thumbnailsItem);
+    // console.log(i,thumbnailsItem);
+    thumbnailsMenu.innerHTML += thumbnailsItem.outerHTML;
 }
-console.log(body, container, mainImg, thumbailsMenu, arrowUp, arrowDown);
+// console.log(body, container, mainImg, thumbailsMenu, arrowUp, arrowDown);
