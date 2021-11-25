@@ -13,7 +13,6 @@ const title = [
     'Germania',
     'Paradise'
 ]
-
 const text = [
     'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam, cumque provident totam omnis, magnam dolores dolorum corporis.',
     'Lorem ipsum',
@@ -22,46 +21,57 @@ const text = [
     'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
 ]
 // FINE dati ricevuti
-// Acquisisco body
-const body = document.querySelector('body');
-// Creazione div.container
+const body = document.querySelector('body'); //seleziono body
+// creo div.container
 const container = document.createElement('div');
-container.classList.add('container');
-// Creazione div.main-img-container
-const mainImgContainer = document.createElement('div');
-mainImgContainer.classList.add('main-img-container');
-mainImgContainer.style.backgroundImage = `url(${items[0]})`;
-// Creazione img.main-img
-// const mainImg = document.createElement('img');
-// mainImg.classList.add('main-img');
-// Creazione titolo
-const h1 = document.createElement('h1');
-h1.innerHTML = title[0];
-// Creazione text
-const p = document.createElement('p');
-p.innerHTML = text[0];
-// Creazione div.thumbmails-menu
-const thumbnailsMenu = document.createElement('div');
-thumbnailsMenu.classList.add('thumbnails-menu');
-// inserimento nel DOM degli elementi creati
+container.classList.add('container','d-flex');
+// BODY > CONTAINER
 body.prepend(container);
-container.append(mainImgContainer,thumbnailsMenu);
-mainImgContainer.append(h1,p);
-// mainImgContainer.append(mainImg);
-// Creazione e inserimento nel dom div.thumbnails-item
+// creo div.main-img-container
+const mainImgContainer = document.createElement('div');
+mainImgContainer.classList.add('main-img-container','d-flex');
+// CONTAINER > MAIN-IMG-CONTAINER
+container.append(mainImgContainer);
+// MAIN-IMG-CONTAINER > IMG
+mainImgContainer.innerHTML = `<img src = ${items[1]} alt=''>`;
+// creo div.text-div
+const textDiv = document.createElement('div');
+textDiv.classList.add('text-div','d-flex');
+// creo span.title
+const span = document.createElement('span');
+span.classList.add('title')
+span.innerHTML = title[1];
+// creo paragrafo
+const p = document.createElement('p');
+p.innerHTML = text[1];
+// MAIN-IMG-CONTAINER > TEXT-DIV
+mainImgContainer.append(textDiv);
+/*  TEXT-DIV > SPAN,
+    TEXT-DIV > P*/
+textDiv.append(span,p);
+// creo div.container-thumbails
+const thumbnailsMenu = document.createElement('div');
+thumbnailsMenu.classList.add('thumbnails-menu','d-flex');
+// CONTAINER > THUMBANAILS-MENU
+container.append(thumbnailsMenu);
+//scorro la lista (items.lenght = qualsiasi lista assegnata.lenght ... necessita controllo in caso di usi futuri)
 for(let i = 0; i<items.length;i++) {
-    // Creazione item Thumbnails
+    // Creo div.thumbnails-item
     const thumbnailsItem = document.createElement('img');
     thumbnailsItem.classList.add('thumbnails-item');
+    //associo src immagine a seconda dell'indice
     thumbnailsItem.src=items[i];
     thumbnailsMenu.innerHTML += thumbnailsItem.outerHTML;
-    // Creazione img Thumbnails
 }
-// Creazione div.arrow-up/arrow-down
+// Creazione div.arrow-up
 const arrowUp = document.createElement('div');
 arrowUp.classList.add('arrow-up');
+arrowUp.innerHTML = '<i class="fas fa-chevron-up"></i>';
+// Creazione div.arrow-down
 const arrowDown = document.createElement('div');
 arrowDown.classList.add('arrow-down');
-arrowUp.innerHTML = '<i class="fas fa-chevron-up"></i>';
 arrowDown.innerHTML = '<i class="fas fa-chevron-down"></i>';
+/* THUMBNAILS > ARROW-UP
+THUMBNAILS > ARROW-DOWN
+*/
 thumbnailsMenu.append(arrowUp,arrowDown);
