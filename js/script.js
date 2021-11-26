@@ -34,7 +34,7 @@ mainImgContainer.classList.add('main-img-container','d-flex');
 // CONTAINER > MAIN-IMG-CONTAINER
 container.append(mainImgContainer);
 // MAIN-IMG-CONTAINER > IMG
-mainImgContainer.innerHTML = `<img class='img--${startIndex}' src = ${items[startIndex]} alt=''>`;
+mainImgContainer.innerHTML = `<div id='div-image'><img class='img--${startIndex}' src = ${items[startIndex]} alt=''><div>`;
 // creo div.text-div
 const textDiv = document.createElement('div');
 textDiv.classList.add('text-div','d-flex');
@@ -89,27 +89,26 @@ arrowUp.addEventListener('click',function(){
     // console.log('entrato in arrowUp.addEvent');
     // const thumb = document.querySelector('.thumbnails-item.active');
     // console.log(thumb);
+    const divImage = document.getElementById('div-image');
     const actualImage = document.querySelector('.main-img-container img');
     const actualThumb = document.querySelector('.thumbnails-item.active');
-    console.log(actualImage,actualThumb);
     //trova classe img--${valore} 
     const imageClassPrefix = 'img--';
     for(let i = 0; i < actualImage.classList.length;i++) {
         const imageClassValue = parseInt(actualImage.classList[i].slice(5, actualImage.classList[i].length));
-        if(actualImage.classList[i].startsWith(imageClassPrefix)){
-            // const imageClassPrefix = actualImage.classList[i].slice(0,5);
-            // console.log(imageClassPrefix,imageClassValue);
-            //nuova classe
-            console.log(imageClassPrefix,imageClassValue);
-            let newClassValue = (imageClassValue -1);
-            let newClass = (imageClassPrefix + newClassValue);
-            actualThumb.classList.remove('active');
-            (actualThumb.previousSibling).classList.add('active');
-            actualImage.src = items[newClassValue];
-            actualImage.classList[i].replace(newClass);
-            span.innerHTML = title[newClassValue];
-            p.innerHTML = text[newClassValue];
-        }
+        // const imageClassPrefix = actualImage.classList[i].slice(0,5);
+        // console.log(imageClassPrefix,imageClassValue);
+        //nuova classe
+        const newClassValue = (imageClassValue -1);
+        const newClass = (imageClassPrefix + newClassValue);
+        actualThumb.classList.remove('active');
+        (actualThumb.previousSibling).classList.add('active');
+        divImage.innerHTML = `<img class='img--${newClassValue}' src = ${items[newClassValue]} alt=''>`;
+        console.log(items[newClassValue]);
+        actualImage.classList[i].replace(newClass);
+        span.innerHTML = title[newClassValue];
+        p.innerHTML = text[newClassValue];
+        console.log(imageClassPrefix, imageClassValue, newClassValue, newClass);
     }
 });
 // click su arrow down
@@ -128,7 +127,7 @@ arrowDown.addEventListener('click',function() {
             const newClass = (imageClassPrefix + newClassValue);
             actualThumb.classList.remove('active');
             (actualThumb.nextSibling).classList.add('active');
-            actualImage.src = items[newClassValue];
+            console.log(actualImage.src);
             actualImage.classList[i].replace(newClass);
             span.innerHTML = title[newClassValue];
             p.innerHTML = text[newClassValue];
