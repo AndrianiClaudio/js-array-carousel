@@ -20,7 +20,7 @@ const text = [
     'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
     'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
 ]
-let startIndex = 1;
+let startIndex = 3;
 // FINE dati ricevuti
 const body = document.querySelector('body'); //seleziono body
 // creo div.container
@@ -86,42 +86,52 @@ thumbnailsMenu.append(arrowUp,arrowDown);
 
 // click su arrow up
 arrowUp.addEventListener('click',function(){
-    // if(actualImageIndex > 0) {
-    //     console.log(actualImage.classList,actualThumb.classList);
-    // } else {
-    //     console.log('non puoi andare piu sopra');
-    // }
+    // console.log('entrato in arrowUp.addEvent');
+    // const thumb = document.querySelector('.thumbnails-item.active');
+    // console.log(thumb);
+    const actualImage = document.querySelector('.main-img-container img');
+    const actualThumb = document.querySelector('.thumbnails-item.active');
+    console.log(actualImage,actualThumb);
+    //trova classe img--${valore} 
+    const imageClassPrefix = 'img--';
+    for(let i = 0; i < actualImage.classList.length;i++) {
+        const imageClassValue = parseInt(actualImage.classList[i].slice(5, actualImage.classList[i].length));
+        if(actualImage.classList[i].startsWith(imageClassPrefix)){
+            // const imageClassPrefix = actualImage.classList[i].slice(0,5);
+            // console.log(imageClassPrefix,imageClassValue);
+            //nuova classe
+            console.log(imageClassPrefix,imageClassValue);
+            let newClassValue = (imageClassValue -1);
+            let newClass = (imageClassPrefix + newClassValue);
+            actualThumb.classList.remove('active');
+            (actualThumb.previousSibling).classList.add('active');
+            actualImage.src = items[newClassValue];
+            actualImage.classList[i].replace(newClass);
+            span.innerHTML = title[newClassValue];
+            p.innerHTML = text[newClassValue];
+        }
+    }
+});
+// click su arrow down
+arrowDown.addEventListener('click',function() {
     const actualImage = document.querySelector('.main-img-container img');
     const actualThumb = document.querySelector('.thumbnails-item.active');
     //trova classe img--${valore} 
     const imageClassPrefix = 'img--';
-    const thumbClassPrefix = 'img-thumb--';
-    for(let i = 0; i < actualImage.classList.length;i++) {
-        if(actualImage.classList[i].startsWith(imageClassPrefix)){
+    for (let i = 0; i < actualImage.classList.length; i++) {
+        if (actualImage.classList[i].startsWith(imageClassPrefix)) {
             // const imageClassPrefix = actualImage.classList[i].slice(0,5);
             const imageClassValue = parseInt(actualImage.classList[i].slice(5, actualImage.classList[i].length));
             // console.log(imageClassPrefix,imageClassValue);
             //nuova classe
-            const newClassValue = (imageClassValue -1);
+            const newClassValue = (imageClassValue + 1);
             const newClass = (imageClassPrefix + newClassValue);
             actualThumb.classList.remove('active');
-            (actualThumb.previousSibling).classList.add('active');
-            actualImage.src = items [newClassValue];
+            (actualThumb.nextSibling).classList.add('active');
+            actualImage.src = items[newClassValue];
             actualImage.classList[i].replace(newClass);
+            span.innerHTML = title[newClassValue];
+            p.innerHTML = text[newClassValue];
         }
     }
-    // const thumbClassPrefix = 'img-thumb--';
-    // for(let i = 0; i < actualThumb.classList.length;i++) {
-    // }
-});
-// click su arrow down
-arrowDown.addEventListener('click',function() {
-    // const actualImage = document.querySelector('.main-img-container img');
-    // //in caso ci fossero piu di 9 img ci sarebbe bisogno di altri controlli, per ora appare ok pre ricavare l'indice della foto attualmente visualizzata
-    // const actualImageIndex = actualImage.classList[0].slice(actualImage.classList[0].length - 1, actualImage.classList[0].length);
-    // if (actualImageIndex == items.length-1) {
-    //     console.log('non puoi andare piu sotto');
-    // } else {
-    //     console.log('Andremo sotto');
-    // }
 });
