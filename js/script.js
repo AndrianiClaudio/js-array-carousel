@@ -113,24 +113,25 @@ arrowUp.addEventListener('click',function(){
 });
 // click su arrow down
 arrowDown.addEventListener('click',function() {
+    const divImage = document.getElementById('div-image');
     const actualImage = document.querySelector('.main-img-container img');
     const actualThumb = document.querySelector('.thumbnails-item.active');
     //trova classe img--${valore} 
     const imageClassPrefix = 'img--';
     for (let i = 0; i < actualImage.classList.length; i++) {
-        if (actualImage.classList[i].startsWith(imageClassPrefix)) {
-            // const imageClassPrefix = actualImage.classList[i].slice(0,5);
-            const imageClassValue = parseInt(actualImage.classList[i].slice(5, actualImage.classList[i].length));
-            // console.log(imageClassPrefix,imageClassValue);
-            //nuova classe
-            const newClassValue = (imageClassValue + 1);
-            const newClass = (imageClassPrefix + newClassValue);
-            actualThumb.classList.remove('active');
-            (actualThumb.nextSibling).classList.add('active');
-            console.log(actualImage.src);
-            actualImage.classList[i].replace(newClass);
-            span.innerHTML = title[newClassValue];
-            p.innerHTML = text[newClassValue];
-        }
+        const imageClassValue = parseInt(actualImage.classList[i].slice(5, actualImage.classList[i].length));
+        // const imageClassPrefix = actualImage.classList[i].slice(0,5);
+        // console.log(imageClassPrefix,imageClassValue);
+        //nuova classe
+        const newClassValue = (imageClassValue + 1);
+        const newClass = (imageClassPrefix + newClassValue);
+        actualThumb.classList.remove('active');
+        (actualThumb.nextSibling).classList.add('active');
+        divImage.innerHTML = `<img class='img--${newClassValue}' src = ${items[newClassValue]} alt=''>`;
+        console.log(items[newClassValue]);
+        actualImage.classList[i].replace(newClass);
+        span.innerHTML = title[newClassValue];
+        p.innerHTML = text[newClassValue];
+        console.log(imageClassPrefix, imageClassValue, newClassValue, newClass);
     }
 });
