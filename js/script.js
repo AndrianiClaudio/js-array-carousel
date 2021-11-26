@@ -86,29 +86,28 @@ thumbnailsMenu.append(arrowUp,arrowDown);
 
 // click su arrow up
 arrowUp.addEventListener('click',function(){
-    // console.log('entrato in arrowUp.addEvent');
-    // const thumb = document.querySelector('.thumbnails-item.active');
-    // console.log(thumb);
     const divImage = document.getElementById('div-image');
     const actualImage = document.querySelector('.main-img-container img');
     const actualThumb = document.querySelector('.thumbnails-item.active');
     //trova classe img--${valore} 
     const imageClassPrefix = 'img--';
     for(let i = 0; i < actualImage.classList.length;i++) {
+        //valore dopo class='img--
         const imageClassValue = parseInt(actualImage.classList[i].slice(5, actualImage.classList[i].length));
-        // const imageClassPrefix = actualImage.classList[i].slice(0,5);
-        // console.log(imageClassPrefix,imageClassValue);
-        //nuova classe
-        const newClassValue = (imageClassValue -1);
-        const newClass = (imageClassPrefix + newClassValue);
-        actualThumb.classList.remove('active');
-        (actualThumb.previousSibling).classList.add('active');
+        //diminuisco valore... quando = 0 vado a items.length
+        let newClassValue = (imageClassValue -1);
+        if(newClassValue < 0) {
+            newClassValue = items.length -1;
+            //creo nuova classe
+            const newClass = (imageClassPrefix + newClassValue);
+            //rimuovi active alla thumb e lo aggiunge alla precedente
+        }
+        // (actualThumb.previousSibling).classList.add('active');
+        // actualThumb.classList.remove('active');
+        //stampa nuova immagine e testo
         divImage.innerHTML = `<img class='img--${newClassValue}' src = ${items[newClassValue]} alt=''>`;
-        console.log(items[newClassValue]);
-        actualImage.classList[i].replace(newClass);
         span.innerHTML = title[newClassValue];
         p.innerHTML = text[newClassValue];
-        console.log(imageClassPrefix, imageClassValue, newClassValue, newClass);
     }
 });
 // click su arrow down
@@ -119,19 +118,26 @@ arrowDown.addEventListener('click',function() {
     //trova classe img--${valore} 
     const imageClassPrefix = 'img--';
     for (let i = 0; i < actualImage.classList.length; i++) {
+        //valore dopo class='img--
         const imageClassValue = parseInt(actualImage.classList[i].slice(5, actualImage.classList[i].length));
-        // const imageClassPrefix = actualImage.classList[i].slice(0,5);
-        // console.log(imageClassPrefix,imageClassValue);
-        //nuova classe
-        const newClassValue = (imageClassValue + 1);
-        const newClass = (imageClassPrefix + newClassValue);
-        actualThumb.classList.remove('active');
-        (actualThumb.nextSibling).classList.add('active');
-        divImage.innerHTML = `<img class='img--${newClassValue}' src = ${items[newClassValue]} alt=''>`;
+        //aumento valore
+        let newClassValue = (imageClassValue + 1);
+        console.log(newClassValue);
+        if (newClassValue >= items.length) {
+            newClassValue = 0;
+            //creo nuova classe
+            const newClass = (imageClassPrefix + newClassValue);
+            //rimuovi active alla thumb e lo aggiunge alla precedente
+        }
+        //creo nuova classe
+        //rimuovi active alla thumb e lo aggiunge alla successiva
+        // actualThumb.classList.remove('active');
+        // (actualThumb.nextSibling).classList.add('active');
+        //stampa nuova immagine e testo
+        divImage.innerHTML = `<img class='img--${newClassValue}' 
+        src = ${items[newClassValue]} alt=''>`;
         console.log(items[newClassValue]);
-        actualImage.classList[i].replace(newClass);
         span.innerHTML = title[newClassValue];
         p.innerHTML = text[newClassValue];
-        console.log(imageClassPrefix, imageClassValue, newClassValue, newClass);
     }
 });
