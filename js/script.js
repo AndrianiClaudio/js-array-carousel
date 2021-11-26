@@ -20,7 +20,7 @@ const text = [
     'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
     'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
 ]
-let startIndex = 3;
+let startIndex = 0;
 // FINE dati ricevuti
 const body = document.querySelector('body'); //seleziono body
 // creo div.container
@@ -67,6 +67,11 @@ for(let i = 0; i<items.length;i++) {
     if(i == startIndex) {
         thumbnailsItem.classList.add('active');
     }
+    if(i == 0) {
+        thumbnailsItem.classList.add('first');
+    } else if(i == items.length-1) {
+        thumbnailsItem.classList.add('last');
+    }
     //associo src immagine a seconda dell'indice
     thumbnailsItem.src=items[i];
     thumbnailsMenu.innerHTML += thumbnailsItem.outerHTML;
@@ -83,28 +88,33 @@ arrowDown.innerHTML = '<i class="fas fa-chevron-down"></i>';
 THUMBNAILS > ARROW-DOWN
 */
 thumbnailsMenu.append(arrowUp,arrowDown);
-
+const first = document.querySelector('.thumbnails-item.first');
+const last = document.querySelector('.thumbnails-item.last');
 // click su arrow up
 arrowUp.addEventListener('click',function(){
+    let newClassValue = items.length-1;
     const divImage = document.getElementById('div-image');
     const actualImage = document.querySelector('.main-img-container img');
-    const actualThumb = document.querySelector('.thumbnails-item.active');
     //trova classe img--${valore} 
-    const imageClassPrefix = 'img--';
     for(let i = 0; i < actualImage.classList.length;i++) {
         //valore dopo class='img--
         const imageClassValue = parseInt(actualImage.classList[i].slice(5, actualImage.classList[i].length));
+        let actualThumb = document.querySelector('.thumbnails-item.active');
         //diminuisco valore... quando = 0 vado a items.length
-        let newClassValue = (imageClassValue -1);
-        if(newClassValue < 0) {
-            newClassValue = items.length -1;
-            //creo nuova classe
-            const newClass = (imageClassPrefix + newClassValue);
-            //rimuovi active alla thumb e lo aggiunge alla precedente
+        if(imageClassValue >= 0) { 
+            actualThumb.classList.remove('active');
+            let previous = (actualThumb.previousElementSibling);
+            if(previous === null) {
+                divImage.innerHTML = `<img class='img--${newClassValue}' src = ${items[newClassValue]} alt=''>`;
+                actualThumb = last;
+                actualThumb.classList.add('active');
+            } else {//diminuisco valore indice
+                newClassValue = imageClassValue - 1;
+                // console.log(newClassValue);
+                previous.classList.add('active');
+            }
         }
-        // (actualThumb.previousSibling).classList.add('active');
-        // actualThumb.classList.remove('active');
-        //stampa nuova immagine e testo
+        // stampa nuova immagine e testo
         divImage.innerHTML = `<img class='img--${newClassValue}' src = ${items[newClassValue]} alt=''>`;
         span.innerHTML = title[newClassValue];
         p.innerHTML = text[newClassValue];
@@ -112,31 +122,30 @@ arrowUp.addEventListener('click',function(){
 });
 // click su arrow down
 arrowDown.addEventListener('click',function() {
+    let newClassValue = 0;
     const divImage = document.getElementById('div-image');
     const actualImage = document.querySelector('.main-img-container img');
-    const actualThumb = document.querySelector('.thumbnails-item.active');
     //trova classe img--${valore} 
-    const imageClassPrefix = 'img--';
     for (let i = 0; i < actualImage.classList.length; i++) {
         //valore dopo class='img--
         const imageClassValue = parseInt(actualImage.classList[i].slice(5, actualImage.classList[i].length));
-        //aumento valore
-        let newClassValue = (imageClassValue + 1);
-        console.log(newClassValue);
-        if (newClassValue >= items.length) {
-            newClassValue = 0;
-            //creo nuova classe
-            const newClass = (imageClassPrefix + newClassValue);
-            //rimuovi active alla thumb e lo aggiunge alla precedente
+        let actualThumb = document.querySelector('.thumbnails-item.active');
+        //diminuisco valore... quando = 0 vado a items.length
+        if (imageClassValue >= 0) {
+            actualThumb.classList.remove('active');
+            let next = (actualThumb.nextElementSibling);
+            if (next === null || next.classList.contains('arrow-up')) {
+                divImage.innerHTML = `<img class='img--${newClassValue}' src = ${items[newClassValue]} alt=''>`;
+                actualThumb = first;
+                actualThumb.classList.add('active');
+            } else {//incremento valore indice
+                newClassValue = imageClassValue + 1;
+                // console.log(newClassValue);
+                next.classList.add('active');
+            }
         }
-        //creo nuova classe
-        //rimuovi active alla thumb e lo aggiunge alla successiva
-        // actualThumb.classList.remove('active');
-        // (actualThumb.nextSibling).classList.add('active');
-        //stampa nuova immagine e testo
-        divImage.innerHTML = `<img class='img--${newClassValue}' 
-        src = ${items[newClassValue]} alt=''>`;
-        console.log(items[newClassValue]);
+        // stampa nuova immagine e testo
+        divImage.innerHTML = `<img class='img--${newClassValue}' src = ${items[newClassValue]} alt=''>`;
         span.innerHTML = title[newClassValue];
         p.innerHTML = text[newClassValue];
     }
