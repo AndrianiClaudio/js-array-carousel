@@ -20,7 +20,7 @@ const text = [
     'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
     'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
 ]
-let startIndex = 0;
+let startIndex = 1;
 // FINE dati ricevuti
 const body = document.querySelector('body'); //seleziono body
 // creo div.container
@@ -62,7 +62,7 @@ let thItemLen = 100/items.length;
 for(let i = 0; i<items.length;i++) {
     // Creo div.thumbnails-item
     const thumbnailsItem = document.createElement('img');
-    thumbnailsItem.classList.add('thumbnails-item',`img-thumb--${i}`);
+    thumbnailsItem.classList.add('thumbnails-item');
     thumbnailsItem.style.height = `${thItemLen}%`;
     if(i == startIndex) {
         thumbnailsItem.classList.add('active');
